@@ -1,0 +1,8 @@
+MMUDescriptionEditor/bin/Debug/*
+MMUDescriptionEditor/bin/Release/*
+MMUDescriptionEditor/obj/*
+MMULibraryLinker/bin/Debug/*
+MMULibraryLinker/bin/Release/*
+MMULibraryLinker/obj/*
+UnityEngine.dllx
+UnityEngine.dll

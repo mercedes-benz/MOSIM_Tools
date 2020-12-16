@@ -1,0 +1,4 @@
+1.1
+ - Possibility to mark library as default task editor connetion in launcher, and default remote MMU library
+ - Support for multiple launcher/MMU library managers installations on same machine
+1.0
