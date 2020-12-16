@@ -21,9 +21,6 @@ All tools contained in the repository utilize pre-built binaries of the core fra
 To utilize the respective tool, either the Unity project or the visual studio solution must be built.
 
 
-
->>>>>>> Release
-
 ## Contributing
 
 We welcome any contributions.
