@@ -64,13 +64,18 @@ public class MMUGenerator
     /// Changes the asset bundle names to the desired name
     /// </summary>
     /// <param name="name"></param>
-    public static void ChangeBundleName(string name)
+    public static void ChangeBundleName(string name, GameObject mmuPrefab = null)
     {
-        var assets = Selection.objects.Where(o => !string.IsNullOrEmpty(AssetDatabase.GetAssetPath(o))).ToArray();
+        if (mmuPrefab == null) {        
+            var assets = Selection.objects.Where(o => !string.IsNullOrEmpty(AssetDatabase.GetAssetPath(o))).ToArray();
 
-        foreach (var a in assets)
-        {
-            string assetPath = AssetDatabase.GetAssetPath(a);
+            foreach (var a in assets)
+            {
+                string assetPath = AssetDatabase.GetAssetPath(a);
+                AssetImporter.GetAtPath(assetPath).SetAssetBundleNameAndVariant(name, "");
+            }       
+        } else { //V2 code
+            string assetPath = AssetDatabase.GetAssetPath(mmuPrefab);
             AssetImporter.GetAtPath(assetPath).SetAssetBundleNameAndVariant(name, "");
         }
     }
@@ -113,7 +118,8 @@ public class MMUGenerator
         }
 
         //Add the unity dll (UnityEngine dll has a different ending since otherwise unity would throw errors)
-        File.Copy("Assets\\MMUGenerator\\Dependencies\\UnityEngine.dllx", path + Path.GetFileName("UnityEngine.dll"));
+        System.IO.File.Copy("Assets\\MMUGenerator\\Dependencies\\UnityEngine.dllx", path + System.IO.Path.GetFileName("UnityEngine.dll"));
+
         parameters.ReferencedAssemblies.Add(path + System.IO.Path.GetFileName("UnityEngine.dll"));
 
 
@@ -199,9 +205,10 @@ public class MMUGenerator
         description.Language = "UnityC#";
         description.Dependencies = new List<MDependency>()
         {
+            //Add AssetBundle as dependency
             new MDependency(description.Name.ToLower(), MDependencyType.ProgramLibrary, new MVersion(0), new MVersion(1))
             {
-                 Name = description.Name.ToLower()
+                 Name = $"{description.Name.ToLower()}assets"
             }
         };
 
@@ -298,15 +305,11 @@ public class AutoCodeGenerator
         }
     }
 
-    [MenuItem("MMI/Auto Generate Bone Mapping Code")]
-    public static void SetupBoneMapping()
+    public static void SetupBoneMapping(GameObject mmuInstance)
     {
-        if (Selection.activeGameObject== null)
-            return;
+        UnityMMUBase mmuBase = mmuInstance.GetComponent<UnityMMUBase>();
 
-        UnityMMUBase mmuBase = Selection.activeGameObject.GetComponent<UnityMMUBase>();
-
-        Animator animator = Selection.activeGameObject.GetComponent<Animator>();
+        Animator animator = mmuInstance.GetComponent<Animator>();
 
         if (animator != null && mmuBase != null)
         {
@@ -321,7 +324,7 @@ public class AutoCodeGenerator
 
                     if (transform != null)
                     {
-                        boneMapping.Add(transform.name,MMIUnity.UnityJointTypeMapping.ToJointType[bone]);
+                        boneMapping.Add(transform.name, MMIUnity.UnityJointTypeMapping.ToJointType[bone]);
                         //boneMapping.Add(transform.name, (MJointType)System.Enum.Parse(typeof(MJointType), bone.ToString()));
                     }
                 }
@@ -347,9 +350,9 @@ public class AutoCodeGenerator
             //Find the script with the same name
             string file = MMUGenerator.GetFiles("Assets//" + mmuBase.name + "//Scripts//").ToList().Find(s => Path.GetExtension(s) == ".cs");
 
-            if(file == null)
+            if (file == null)
             {
-                EditorUtility.DisplayDialog("Automatic code generation failed!","Cannot find the file of the basic MMU script of thie gameobject. Please ensure that the gameobject has the same nam as the MMUScript.", "Continue");
+                EditorUtility.DisplayDialog("Automatic code generation failed!", "Cannot find the file of the basic MMU script of thie gameobject. Please ensure that the gameobject has the same nam as the MMUScript.", "Continue");
                 return;
             }
 
@@ -386,45 +389,26 @@ public class AutoCodeGenerator
                 mmuBase.RootTransform = mmuBase.GetComponentsInChildren<Transform>().First(s => s.name == mmuBase.name);
 
             }
-           
-            System.IO.File.WriteAllLines(file, lines.ToArray());
+
+            File.WriteAllLines(file, lines.ToArray());
         }
     }
 
-
-    [MenuItem("MMI/Auto Generate Bone Mapping Code", true)]
-    public static bool SetupBoneMappingValidation()
+    public static void AutoGenerateScriptInitialization(GameObject mmuInstance)
     {
-        if (Selection.activeObject == null)
-            return false;
-
-        UnityMMUBase mmuBase = Selection.activeGameObject.GetComponent<UnityMMUBase>();
-
-        Animator animator = Selection.activeGameObject.GetComponent<Animator>();
-
-        return mmuBase != null && animator != null;
-    }
-
-
-    [MenuItem("MMI/Auto Generate Script Initialization Code")]
-    public static void AutoGenerateScriptInitialization()
-    {
-        UnityMMUBase mmuBase = Selection.activeGameObject.GetComponent<UnityMMUBase>();
+        UnityMMUBase mmuBase = mmuInstance.GetComponent<UnityMMUBase>();
 
         if (mmuBase != null)
         {
             //Find the script with the same name
             string file = MMUGenerator.GetFiles("Assets//" + mmuBase.name + "//Scripts//").ToList().Find(s => Path.GetExtension(s) == ".cs");
 
-            List<string> lines = System.IO.File.ReadAllLines(file).ToList();
-
-
+            List<string> lines = File.ReadAllLines(file).ToList();
 
             int addScriptsIndex = lines.IndexOf(lines.Find(s => s.Contains("@AddScripts")));
 
             if (addScriptsIndex > 0)
             {
-
                 lines[addScriptsIndex] = "\t\t" + "//Auto generated source code for script initialization.";
 
                 Component[] components = mmuBase.GetComponents<Component>();
@@ -442,16 +426,8 @@ public class AutoCodeGenerator
                     lines.Insert(addScriptsIndex + index, "\t\tthis.gameObject.AddComponent<" + components[i].GetType() + ">();");
                 }
             }
-            System.IO.File.WriteAllLines(file, lines.ToArray());
+            File.WriteAllLines(file, lines.ToArray());
         }
-    }
-
-
-    [MenuItem("MMI/Auto Generate Script Initialization Code", true)]
-    public static bool AutoGenerateScriptInitializationValidation()
-    {
-        
-        return Selection.activeGameObject !=null && Selection.activeGameObject.GetComponent<IMotionModelUnitDev>() != null;
     }
 }
 

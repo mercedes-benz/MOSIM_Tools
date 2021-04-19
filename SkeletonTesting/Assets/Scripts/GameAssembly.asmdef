@@ -1,0 +1,17 @@
+{
+    "name": "GameAssembly",
+    "references": [
+        "Unity.TextMeshPro",
+        "Unity.Analytics.DataPrivacy",
+        "Analytics",
+        "SimpleFileBrowser"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

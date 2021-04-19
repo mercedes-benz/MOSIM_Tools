@@ -1,0 +1,1244 @@
+{
+  "AvatarID": "lalala3",
+  "Joints": [
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "Hips",
+      "Type": 11,
+      "Position": {
+        "X": 0.0,
+        "Y": 0.94963282346725464,
+        "Z": -0.0674370601773262
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightUpLeg",
+      "Type": 10,
+      "Position": {
+        "X": 0.10665654391050339,
+        "Y": 0.9328961968421936,
+        "Z": -0.0674370601773262
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightLeg",
+      "Type": 9,
+      "Position": {
+        "X": 0.10665654391050339,
+        "Y": 0.49996620416641235,
+        "Z": -0.0674370601773262
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightFoot",
+      "Type": 8,
+      "Position": {
+        "X": 0.10665654391050339,
+        "Y": 0.077756226062774658,
+        "Z": -0.0674370601773262
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftUpLeg",
+      "Type": 5,
+      "Position": {
+        "X": -0.10665654391050339,
+        "Y": 0.9328961968421936,
+        "Z": -0.0674370601773262
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftLeg",
+      "Type": 4,
+      "Position": {
+        "X": -0.10665654391050339,
+        "Y": 0.49996620416641235,
+        "Z": -0.0674370601773262
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftFoot",
+      "Type": 3,
+      "Position": {
+        "X": -0.10665654391050339,
+        "Y": 0.077756226062774658,
+        "Z": -0.0674370601773262
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "Spine",
+      "Type": 0,
+      "Position": {
+        "X": 0.0,
+        "Y": 1.1002681255340576,
+        "Z": -0.0674370601773262
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "Spine1",
+      "Type": 13,
+      "Position": {
+        "X": 0.0,
+        "Y": 1.2025908231735229,
+        "Z": -0.0674370601773262
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "Spine2",
+      "Type": 0,
+      "Position": {
+        "X": 0.0,
+        "Y": 1.309139609336853,
+        "Z": -0.0674370601773262
+      },
+      "Rotation": {
+        "X": -0.0019910151604562998,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 0.99999803304672241
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "Spine3",
+      "Type": 14,
+      "Position": {
+        "X": 0.0,
+        "Y": 1.4114623069763184,
+        "Z": -0.0674370601773262
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "Neck",
+      "Type": 15,
+      "Position": {
+        "X": 0.0,
+        "Y": 1.5208274126052856,
+        "Z": -0.0674370601773262
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "Head",
+      "Type": 16,
+      "Position": {
+        "X": 0.0,
+        "Y": 1.6171042919158936,
+        "Z": -0.0674370601773262
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightShoulder",
+      "Type": 0,
+      "Position": {
+        "X": 0.033466309309005737,
+        "Y": 1.4843744039535522,
+        "Z": -0.0674370601773262
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000002384185791
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightArm",
+      "Type": 22,
+      "Position": {
+        "X": 0.16733169555664063,
+        "Y": 1.4843744039535522,
+        "Z": -0.0674370601773262
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000002384185791
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightForeArm",
+      "Type": 23,
+      "Position": {
+        "X": 0.41938987374305725,
+        "Y": 1.4843744039535522,
+        "Z": -0.0674370601773262
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000002384185791
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightHand",
+      "Type": 24,
+      "Position": {
+        "X": 0.67924630641937256,
+        "Y": 1.4843744039535522,
+        "Z": -0.0674370601773262
+      },
+      "Rotation": {
+        "X": -1.7715434674769881E-10,
+        "Y": 1.5108425621690458E-10,
+        "Z": -6.6739431758833234E-09,
+        "W": 1.0000002384185791
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightHandThumb1",
+      "Type": 0,
+      "Position": {
+        "X": 0.70501101016998291,
+        "Y": 1.4863420724868774,
+        "Z": -0.035134680569171906
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000002384185791
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightHandThumb2",
+      "Type": 0,
+      "Position": {
+        "X": 0.74313151836395264,
+        "Y": 1.4863420724868774,
+        "Z": -0.035134680569171906
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000002384185791
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightHandThumb3",
+      "Type": 0,
+      "Position": {
+        "X": 0.76961374282836914,
+        "Y": 1.4863420724868774,
+        "Z": -0.035134680569171906
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000002384185791
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightInHandIndex",
+      "Type": 0,
+      "Position": {
+        "X": 0.71261656284332275,
+        "Y": 1.4896347522735596,
+        "Z": -0.046959139406681061
+      },
+      "Rotation": {
+        "X": -1.6318771334233872E-10,
+        "Y": 1.660719339824368E-10,
+        "Z": 1.6858093943028507E-07,
+        "W": 1.0000001192092896
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightHandIndex1",
+      "Type": 0,
+      "Position": {
+        "X": 0.76661896705627441,
+        "Y": 1.488688588142395,
+        "Z": -0.03661637008190155
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000001192092896
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightHandIndex2",
+      "Type": 0,
+      "Position": {
+        "X": 0.804085373878479,
+        "Y": 1.488688588142395,
+        "Z": -0.03661637008190155
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000001192092896
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightHandIndex3",
+      "Type": 0,
+      "Position": {
+        "X": 0.82532727718353271,
+        "Y": 1.4886881113052368,
+        "Z": -0.03661637008190155
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000001192092896
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightInHandMiddle",
+      "Type": 0,
+      "Position": {
+        "X": 0.71425473690032959,
+        "Y": 1.4897290468215942,
+        "Z": -0.0596039816737175
+      },
+      "Rotation": {
+        "X": 8.4319135007504542E-11,
+        "Y": 2.4627816452849061E-10,
+        "Z": 1.6858186313584156E-07,
+        "W": 1.0000002384185791
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightHandMiddle1",
+      "Type": 0,
+      "Position": {
+        "X": 0.76781356334686279,
+        "Y": 1.48885977268219,
+        "Z": -0.056354600936174393
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000003576278687
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightHandMiddle2",
+      "Type": 0,
+      "Position": {
+        "X": 0.80869650840759277,
+        "Y": 1.48885977268219,
+        "Z": -0.056354600936174393
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000003576278687
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightHandMiddle3",
+      "Type": 0,
+      "Position": {
+        "X": 0.83432495594024658,
+        "Y": 1.48885977268219,
+        "Z": -0.056354600936174393
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000003576278687
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightInHandRing",
+      "Type": 0,
+      "Position": {
+        "X": 0.7140800952911377,
+        "Y": 1.4899427890777588,
+        "Z": -0.068773038685321808
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000002384185791
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightHandRing1",
+      "Type": 0,
+      "Position": {
+        "X": 0.76205587387084961,
+        "Y": 1.489714503288269,
+        "Z": -0.07373172789812088
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000003576278687
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightHandRing2",
+      "Type": 0,
+      "Position": {
+        "X": 0.79768955707550049,
+        "Y": 1.489714503288269,
+        "Z": -0.073731817305088043
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000003576278687
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightHandRing3",
+      "Type": 0,
+      "Position": {
+        "X": 0.82241356372833252,
+        "Y": 1.4896730184555054,
+        "Z": -0.073714829981327057
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000003576278687
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightInHandPinky",
+      "Type": 0,
+      "Position": {
+        "X": 0.71196722984313965,
+        "Y": 1.4892337322235107,
+        "Z": -0.079876206815242767
+      },
+      "Rotation": {
+        "X": -1.6419718362747915E-10,
+        "Y": 1.6507395450560125E-10,
+        "Z": 0.0,
+        "W": 1.0000003576278687
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightHandPinky1",
+      "Type": 0,
+      "Position": {
+        "X": 0.75483191013336182,
+        "Y": 1.489005446434021,
+        "Z": -0.091165520250797272
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000003576278687
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightHandPinky2",
+      "Type": 0,
+      "Position": {
+        "X": 0.78336620330810547,
+        "Y": 1.489005446434021,
+        "Z": -0.091165520250797272
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000003576278687
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "RightHandPinky3",
+      "Type": 0,
+      "Position": {
+        "X": 0.80139684677124023,
+        "Y": 1.4890049695968628,
+        "Z": -0.091165520250797272
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000003576278687
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftShoulder",
+      "Type": 0,
+      "Position": {
+        "X": -0.033466309309005737,
+        "Y": 1.4843744039535522,
+        "Z": -0.0674370601773262
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000002384185791
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftArm",
+      "Type": 19,
+      "Position": {
+        "X": -0.16733169555664063,
+        "Y": 1.4843744039535522,
+        "Z": -0.0674370601773262
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000002384185791
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftForeArm",
+      "Type": 20,
+      "Position": {
+        "X": -0.41938987374305725,
+        "Y": 1.4843744039535522,
+        "Z": -0.0674370601773262
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000002384185791
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftHand",
+      "Type": 21,
+      "Position": {
+        "X": -0.67924630641937256,
+        "Y": 1.4843744039535522,
+        "Z": -0.0674370601773262
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 3.2117384307639441E-09,
+        "W": 1.0000002384185791
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftHandThumb1",
+      "Type": 0,
+      "Position": {
+        "X": -0.70501101016998291,
+        "Y": 1.4863420724868774,
+        "Z": -0.035134680569171906
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000003576278687
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftHandThumb2",
+      "Type": 0,
+      "Position": {
+        "X": -0.74313151836395264,
+        "Y": 1.4863420724868774,
+        "Z": -0.035134680569171906
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000003576278687
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftHandThumb3",
+      "Type": 0,
+      "Position": {
+        "X": -0.76961374282836914,
+        "Y": 1.4863420724868774,
+        "Z": -0.035134680569171906
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000003576278687
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftInHandIndex",
+      "Type": 0,
+      "Position": {
+        "X": -0.71261656284332275,
+        "Y": 1.4896347522735596,
+        "Z": -0.046959139406681061
+      },
+      "Rotation": {
+        "X": -1.6318771334233872E-10,
+        "Y": -1.660719339824368E-10,
+        "Z": -1.6931929280872282E-07,
+        "W": 1.0000002384185791
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftHandIndex1",
+      "Type": 0,
+      "Position": {
+        "X": -0.76661896705627441,
+        "Y": 1.488688588142395,
+        "Z": -0.03661637008190155
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000003576278687
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftHandIndex2",
+      "Type": 0,
+      "Position": {
+        "X": -0.804085373878479,
+        "Y": 1.488688588142395,
+        "Z": -0.03661637008190155
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000003576278687
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftHandIndex3",
+      "Type": 0,
+      "Position": {
+        "X": -0.82532727718353271,
+        "Y": 1.4886881113052368,
+        "Z": -0.03661637008190155
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000003576278687
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftInHandMiddle",
+      "Type": 0,
+      "Position": {
+        "X": -0.71425473690032959,
+        "Y": 1.4897290468215942,
+        "Z": -0.0596039816737175
+      },
+      "Rotation": {
+        "X": 8.4319135007504542E-11,
+        "Y": -2.4627816452849061E-10,
+        "Z": -1.6858186313584156E-07,
+        "W": 1.0000002384185791
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftHandMiddle1",
+      "Type": 0,
+      "Position": {
+        "X": -0.76781356334686279,
+        "Y": 1.48885977268219,
+        "Z": -0.056354600936174393
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000005960464478
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftHandMiddle2",
+      "Type": 0,
+      "Position": {
+        "X": -0.80869650840759277,
+        "Y": 1.48885977268219,
+        "Z": -0.056354600936174393
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000005960464478
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftHandMiddle3",
+      "Type": 0,
+      "Position": {
+        "X": -0.83432495594024658,
+        "Y": 1.48885977268219,
+        "Z": -0.056354600936174393
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000005960464478
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftInHandRing",
+      "Type": 0,
+      "Position": {
+        "X": -0.7140800952911377,
+        "Y": 1.4899427890777588,
+        "Z": -0.068773038685321808
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": -2.0054358174093068E-10,
+        "W": 1.0000003576278687
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftHandRing1",
+      "Type": 0,
+      "Position": {
+        "X": -0.76205587387084961,
+        "Y": 1.489714503288269,
+        "Z": -0.07373172789812088
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000005960464478
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftHandRing2",
+      "Type": 0,
+      "Position": {
+        "X": -0.79768955707550049,
+        "Y": 1.489714503288269,
+        "Z": -0.073731817305088043
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000005960464478
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftHandRing3",
+      "Type": 0,
+      "Position": {
+        "X": -0.8224111795425415,
+        "Y": 1.489714503288269,
+        "Z": -0.073731817305088043
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000005960464478
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftInHandPinky",
+      "Type": 0,
+      "Position": {
+        "X": -0.71196722984313965,
+        "Y": 1.4892337322235107,
+        "Z": -0.079876206815242767
+      },
+      "Rotation": {
+        "X": -1.6419716974969134E-10,
+        "Y": -1.6507394062781344E-10,
+        "Z": -2.2445334479925805E-10,
+        "W": 1.0000002384185791
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftHandPinky1",
+      "Type": 0,
+      "Position": {
+        "X": -0.75483191013336182,
+        "Y": 1.489005446434021,
+        "Z": -0.091165520250797272
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000003576278687
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftHandPinky2",
+      "Type": 0,
+      "Position": {
+        "X": -0.78336620330810547,
+        "Y": 1.489005446434021,
+        "Z": -0.091165520250797272
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000003576278687
+      },
+      "Channels": null,
+      "Parent": null
+    },
+    {
+      "__isset": {
+        "Channels": false,
+        "Parent": false
+      },
+      "ID": "LeftHandPinky3",
+      "Type": 0,
+      "Position": {
+        "X": -0.80139684677124023,
+        "Y": 1.4890049695968628,
+        "Z": -0.091165520250797272
+      },
+      "Rotation": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0,
+        "W": 1.0000003576278687
+      },
+      "Channels": null,
+      "Parent": null
+    }
+  ]
+}

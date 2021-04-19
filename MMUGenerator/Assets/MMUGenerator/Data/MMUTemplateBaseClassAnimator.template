@@ -103,6 +103,8 @@ public class CLASS_NAME : UnityMMUBase
             //Assign the posture
             this.AssignPostureValues(state.Current);
 
+            this.animator.SetBool("AnimationDone", false);
+
             //To do parameterize the animator based on the given instruction and avatarState
         });
 
@@ -138,7 +140,16 @@ public class CLASS_NAME : UnityMMUBase
             //Get the current posture of the after in the intermediate skeleton representation
             result.Posture = this.GetRetargetedPosture();
 
-            //To do -> Process the events and return it as result     
+            //To do -> Process the events and return it as result
+            if (this.animator.GetBool("AnimationDone"))
+            {
+                result.Events.Add(new MSimulationEvent()
+                {
+                    Name = "Animation finished",
+                    Reference = this.instruction.ID,
+                    Type = mmiConstants.MSimulationEvent_End
+                });
+            }
         });
 
         //Finally, add the end event at the end of the motion
@@ -157,7 +168,23 @@ public class CLASS_NAME : UnityMMUBase
     /// <returns></returns>
     public override List<MConstraint> GetBoundaryConstraints(MInstruction motionCommand)
     {
-        return new List<MConstraint>();
+        List<MConstraint> firstPose = new List<MConstraint>();
+        this.ExecuteOnMainThread(() =>
+        {
+            //Update the animator
+            this.animator.Update((float)0.01);
+
+            //Get the current posture of the after in the intermediate skeleton representation
+            MAvatarPostureValues posture = this.GetRetargetedPosture();
+
+            MConstraint mConstraint = new MConstraint()
+            {
+                ID = MInstructionFactory.GenerateID(),
+                PostureConstraint = new MPostureConstraint(posture)
+            };
+            firstPose.Add(mConstraint);
+        });
+        return firstPose;
     }
 
     /// <summary>

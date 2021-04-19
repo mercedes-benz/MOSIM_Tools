@@ -1,0 +1,3 @@
+MMIFramework: 5
+CSharp: 5.1
+Tool: 5.1.1
