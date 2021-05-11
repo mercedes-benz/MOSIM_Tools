@@ -187,14 +187,24 @@ public class MMUFactory
                 {
                     animatorController.AddLayer(firstLayer);
                 }
-                var newState = animatorController.AddMotion(animationClip);
-                newState.AddStateMachineBehaviour<AnimationEndEvent>();
+                var mainState = animatorController.AddMotion(animationClip);
+                mainState.AddStateMachineBehaviour<AnimationEndEvent>();
 
-                var loopTransition = newState.AddExitTransition();
-                loopTransition.destinationState = newState;
+                var secondState = animatorController.AddMotion(animationClip);
+
+                var loopTransition = mainState.AddExitTransition();
+                loopTransition.destinationState = secondState;
                 loopTransition.exitTime = 1;
                 loopTransition.hasExitTime = true;
                 loopTransition.duration = 0;
+                loopTransition.offset = 0.99f;
+
+                var backwardTransition = secondState.AddExitTransition();
+                backwardTransition.destinationState = mainState;
+                backwardTransition.exitTime = 1;
+                backwardTransition.hasExitTime = true;
+                backwardTransition.duration = 0;
+                backwardTransition.offset = 0;
 
                 mmuCreation.Status = MMUCreation.CreationStatus.AnimationSetup;
                 CreationStorage.SaveCurrent(mmuCreation, CreationStorage.Location.Session);
