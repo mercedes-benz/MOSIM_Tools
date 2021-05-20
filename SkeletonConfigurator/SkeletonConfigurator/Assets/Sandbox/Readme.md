@@ -1,0 +1,1 @@
+Place your code and assets here. The rest of this folder will not be tracked by git. 
