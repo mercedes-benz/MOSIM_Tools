@@ -38,6 +38,21 @@ public class JointAlignment : IJointAlignment
     public override void AlignAvatar(ISVisualizationJoint root)
     {
         this.rootVisualization = root;
+
+        // Align Root
+        var rootJoint = rootVisualization.GetJointByName("Root");
+        var pelvisJoint = rootVisualization.GetJointByName("PelvisCenter");
+        var ProjectedPelvis = new Vector3(pelvisJoint.reference.position.x, 0, pelvisJoint.reference.position.z);
+        if(rootJoint.reference == null)
+        {
+            Debug.Log("Warning: RootJoint could not be aligned, as it does not have any reference!");
+        }
+        else
+        {
+            rootJoint.reference.position = -ProjectedPelvis;
+        }
+        
+
         //this.anim = anim;
         //AlignJoint(rootVisualization.GetJointByName("LeftHip"), rootVisualization.GetJointByName("LeftAnkle"));
         //AlignJoint(rootVisualization.GetJointByName("RightHip"), rootVisualization.GetJointByName("RightAnkle"));

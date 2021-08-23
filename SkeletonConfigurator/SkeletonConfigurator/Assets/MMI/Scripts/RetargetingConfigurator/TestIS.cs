@@ -223,6 +223,7 @@ namespace MMIUnity
 
         public void RealignSkeletons()
         {
+            
             this.skelVis.AlignAvatar();
         }
         
@@ -235,13 +236,17 @@ namespace MMIUnity
             } else
             {
                 this.AvatarID = name;
-                MAvatarPosture p = this.GenerateGlobalPosture();
+                MAvatarPosture p = this.GenerateGlobalPosture(); 
                 p.AvatarID = name;
                 if (this.skelVis != null)
                 {
                     this.skelVis.root.Destroy();
                 }
                 this.SetupRetargeting(name, p);
+                if(this.skelVis.root.reference == null)
+                {
+                    this.skelVis.root.reference = this.transform;
+                }
                 if (posture == null)
                     posture = new MAvatarPostureValues();
                 posture.AvatarID = p.AvatarID;
@@ -291,6 +296,11 @@ namespace MMIUnity
                             this.skelVis.root.Destroy();
                         }
                         this.SetupRetargeting(name, p);
+                        if (this.skelVis.root.reference == null)
+                        {
+                            this.skelVis.root.reference = this.transform;
+                        }
+
                         if (posture == null)
                             posture = new MAvatarPostureValues();
                         posture.AvatarID = p.AvatarID;
@@ -362,6 +372,10 @@ namespace MMIUnity
             else
             {
                 this.SetupRetargeting(id);
+            }
+            if (this.skelVis.root.reference == null)
+            {
+                this.skelVis.root.reference = this.transform;
             }
             start = false;
             started = true;
