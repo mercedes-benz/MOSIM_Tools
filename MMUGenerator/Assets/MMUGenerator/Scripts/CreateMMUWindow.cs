@@ -6,6 +6,7 @@ using System.IO;
 using System.Reflection;
 using UnityEditor;
 using UnityEditor.Animations;
+using UnityEditor.Compilation;
 using UnityEditor.Callbacks;
 using UnityEditor.SceneManagement;
 using UnityEngine;
