@@ -20,7 +20,9 @@ public class JointMap
         MJointType.C4C5Joint,
         MJointType.HeadJoint,
         MJointType.HeadTip,
-        MJointType.MidEye,
+        //MJointType.MidEye,
+        MJointType.LeftEye,
+        MJointType.RightEye,
 
         MJointType.LeftHip,
         MJointType.LeftKnee,

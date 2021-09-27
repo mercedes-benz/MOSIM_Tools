@@ -374,6 +374,19 @@ public class JointMapper2 : MonoBehaviour
         return true;
     }
 
+    private bool IsChildOf(Transform parent, Transform t)
+    {
+        if(parent == t)
+        {
+            return true;
+        }
+        for(int c = 0; c < parent.childCount; c++)
+        {
+            if (IsChildOf(parent.GetChild(c), t)) return true;
+        }
+        return false;
+    }
+
     private bool AutoMapSpine(Transform t, List<Transform> candidates)
     {
         // first go to top: 
@@ -404,10 +417,18 @@ public class JointMapper2 : MonoBehaviour
 
                 // found the head. Reverse List
                 candidates.Reverse();
-                if (this.jointMap.ContainsKey(MJointType.HeadTip) && this.jointMap[MJointType.HeadTip].t == candidates[0])
+
+                if(this.jointMap.ContainsKey(MJointType.HeadJoint) && this.jointMap[MJointType.HeadJoint].manual)
                 {
-                    candidates.Remove(candidates[0]);
-                }
+                    for(int i = candidates.Count -1; i >= 0; i--)
+                    {
+                        if(IsChildOf(this.jointMap[MJointType.HeadJoint].t, candidates[i]))
+                        {
+                            candidates.RemoveAt(i);
+                        }
+                    }
+                    candidates.Insert(0, this.jointMap[MJointType.HeadJoint].t);
+                } 
                 if (candidates.Count > 0)
                     this.AddJointMapEntryAuto(MJointType.HeadJoint, candidates[0]);
                 if (candidates.Count > 1)
@@ -947,6 +968,8 @@ public class JointMapper2 : MonoBehaviour
         this.joints.Add(MJointType.RightShoulder);
         this.joints.Add(MJointType.LeftWrist);
         this.joints.Add(MJointType.RightWrist);
+        this.joints.Add(MJointType.LeftEye);
+        this.joints.Add(MJointType.RightEye);
 
         this.joints.Add(MJointType.S1L5Joint);
         this.joints.Add(MJointType.T12L1Joint);
@@ -954,7 +977,7 @@ public class JointMapper2 : MonoBehaviour
         this.joints.Add(MJointType.C4C5Joint);
         this.joints.Add(MJointType.HeadJoint);
         this.joints.Add(MJointType.HeadTip);
-
+        
         this.joints.Add(MJointType.LeftKnee);
         this.joints.Add(MJointType.LeftAnkle);
         this.joints.Add(MJointType.LeftBall);
