@@ -1,0 +1,1664 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MMIUnity.TargetEngine</name>
+    </assembly>
+    <members>
+        <member name="T:MMIUnity.TargetEngine.AsynchronousSimulationController">
+            <summary>
+            Central class for coordinating the whole simulation.
+            This is an experimental implementation allowing asynchronous updating.
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.AsynchronousSimulationController.SessionId">
+            <summary>
+            The unique session id 
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.AsynchronousSimulationController.TemporalAccuracy">
+            <summary>
+            Specifies the fixed frame time (if non realtime mode)
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.AsynchronousSimulationController.UpdateTime">
+            <summary>
+            Specifies the intervall after which a do step is triggered (0 as fast as possible)
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.AsynchronousSimulationController.PhysicsUpdatesPerFrame">
+            <summary>
+            The amount of physics updates within each frame
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.AsynchronousSimulationController.Avatars">
+            <summary>
+            All assigned avatars
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.AsynchronousSimulationController.RegisterAddress">
+            <summary>
+            The address of the central register of the MMI framework
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.AsynchronousSimulationController.RegisterPort">
+            <summary>
+            The port of the central register of the MMI framework
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.AsynchronousSimulationController.initialized">
+            <summary>
+            Flag which inicates whether the Co Simulator is initialized
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.AsynchronousSimulationController.coSimulationCheckpoints">
+            <summary>
+            The serialized co-simulation checkpoints -> to be extended inn future
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.AsynchronousSimulationController.sceneCheckpoints">
+            <summary>
+            The checkoints of the scenes
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.AsynchronousSimulationController.frameNumber">
+            <summary>
+            The present frame number
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.AsynchronousSimulationController.timer">
+            <summary>
+            A timer used for asynchronous updates.
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.AsynchronousSimulationController.inDoStepFlag">
+            <summary>
+            Flag indicating whether the do step is currently executed
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.AsynchronousSimulationController.OnApplicationQuit">
+            <summary>
+            Method is executed if the application is qut
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.AsynchronousSimulationController.DoStepAsync(System.Single)">
+            <summary>
+            Performs a simulation cycle for a single frame
+            </summary>
+            <param name="time"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.AsynchronousSimulationController.OnResultComputed(MMIStandard.MSimulationResult,MMIUnity.TargetEngine.Scene.MMIAvatar)">
+            <summary>
+            Method which is called for each frame and avatar.
+            In here further processing can be done (e.g. setting variables of the MMIAvatar).
+            </summary>
+            <param name="result"></param>
+            <param name="avatar"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.AsynchronousSimulationController.RegisterAvatar(MMIUnity.TargetEngine.Scene.MMIAvatar)">
+            <summary>
+            Registers a new avatar at the simulation controller
+            </summary>
+            <param name="avatar"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.AsynchronousSimulationController.UnregisterAvatar(MMIUnity.TargetEngine.Scene.MMIAvatar)">
+            <summary>
+            Unregisters an avatar at the simulation controller
+            </summary>
+            <param name="avatar"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.AsynchronousSimulationController.CheckInitialization">
+            <summary>
+            Coroutine to check the initialization state
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.AsynchronousSimulationController.TimerCallback(System.Object)">
+            <summary>
+            Timer callback is utilized if the simulation should be computed asynchronously (not depending on unity main thread)
+            </summary>
+            <param name="state"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.AsynchronousSimulationController.ApplySceneUpdate(System.Collections.Concurrent.ConcurrentDictionary{MMIUnity.TargetEngine.Scene.MMIAvatar,MMIStandard.MSimulationResult})">
+            <summary>
+            Applies the updates of the scene
+            </summary>
+            <param name="results"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.AsynchronousSimulationController.ApplyRemoteSceneUpdates">
+            <summary>
+            Applies scene updates which are remotely defined
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.AsynchronousSimulationController.UpdatePhysics(System.Single)">
+            <summary>
+            Manually updates the phsyics engine using the specified timespan and the PhysicsUpdatesPerFrame variable
+            </summary>
+            <param name="time"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.AsynchronousSimulationController.SaveState">
+            <summary>
+            Saves the state of the scene and all avatars
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.AsynchronousSimulationController.RestoreState">
+             <summary>
+            Restores the state of the scene and all avatars
+             </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.AsynchronousSimulationController.SaveScene">
+            <summary>
+            Creates a snapshot of the scene
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.AsynchronousSimulationController.RestoreScene(System.Byte[])">
+            <summary>
+            Restores the scene based on a snapshot
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="T:MMIUnity.TargetEngine.AvatarBehavior">
+            <summary>
+            The class is responsible for controlling the behavior of the avatar.
+            The class be optionally replaced in future by a more sophisticated reasoning approach.
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.AvatarBehavior.avatar">
+            <summary>
+            The corresponding avatar
+            </summary>
+        </member>
+        <member name="P:MMIUnity.TargetEngine.AvatarBehavior.CoSimulator">
+            <summary>
+            The co-simulator
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.AvatarBehavior.GUIBehaviorInput">
+            <summary>
+            Function is called to control the avatar by using predefined buttons in the GUI.
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.AvatarBehavior.CoSimulator_MSimulationEventHandler(System.Object,MMIStandard.MSimulationEvent)">
+            <summary>
+            Callback for the co-simulation event handler
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.AvatarBehavior.OnGUI">
+            <summary>
+            Basic on gui routine which is executed for each frame on the main thread
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.AvatarBehavior.Update">
+            <summary>
+            Basic update routine
+            </summary>
+        </member>
+        <member name="T:MMIUnity.TargetEngine.DrawingUtils">
+            <summary>
+            Class contains serveral functions for drawing
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.DrawingUtils.DrawPoint(System.Collections.Generic.List{System.Double})">
+            <summary>
+            Method draws a point based on a list of double values
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.DrawingUtils.DrawLine2D(System.Collections.Generic.List{System.Double})">
+            <summary>
+            Draws a line based on a list of 2D coordinates
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.DrawingUtils.DrawLine3D(System.Collections.Generic.List{System.Double})">
+            <summary>
+            Draws a line based on a list of 3D coordinates
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.DrawingUtils.DrawText(System.String)">
+            <summary>
+            Draws a given text and returns the gameobject representing it
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.DrawingUtils.DrawAvatarPosture(MMIStandard.MAvatarPosture)">
+            <summary>
+            Draws the given avatar posture
+            </summary>
+            <param name="posture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.DrawingUtils.DrawPoint3D(UnityEngine.Vector3,UnityEngine.Color,System.Single)">
+            <summary>
+            Draws a point based on 3D coordinates
+            </summary>
+            <param name="position"></param>
+            <param name="color"></param>
+            <param name="scale"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.DrawingUtils.DrawPoint2D(UnityEngine.Vector2,UnityEngine.Color,System.Single)">
+            <summary>
+            Draws a point based on 2D coordinates
+            </summary>
+            <param name="position"></param>
+            <param name="color"></param>
+            <param name="scale"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.DrawingUtils.DrawLine(System.Collections.Generic.List{UnityEngine.Vector3},UnityEngine.Color,System.Single,System.Single)">
+            <summary>
+            Visualizes the global path
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.LocalCoSimulation.ComputeAsync">
+            <summary>
+            Flag which specifies whether the co-simulation is computed asynchronously
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.LocalCoSimulation.temporaryDrawings">
+            <summary>
+            List contains temporary drawings that should be deactivated at the next frame
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.LocalCoSimulation.avatar">
+            <summary>
+            The referenced avatar
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.LocalCoSimulation.serviceAccess">
+            <summary>
+            The service access 
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.LocalCoSimulation.#ctor(System.Collections.Generic.List{MMICSharp.Access.IMotionModelUnitAccess},MMICSharp.Common.IServiceAccess,MMIUnity.TargetEngine.Scene.MMIAvatar)">
+            <summary>
+            Basic constructor
+            </summary>
+            <param name="mmus"></param>
+            <param name="avatar"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.LocalCoSimulation.PreComputeFrame">
+            <summary>
+            Extract the posture information before calling the compute frame
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.LocalCoSimulation.PostComputeFrame(MMIStandard.MSimulationResult)">
+            <summary>
+            Assign the posture after compute frame
+            </summary>
+            <param name="result"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.LocalCoSimulation.HandleDrawingCalls(MMIStandard.MSimulationResult,MMICoSimulation.Internal.MMUContainer)">
+            <summary>
+            Method to handle the actual drawing calls
+            </summary>
+            <param name="mmuResult"></param>
+            <param name="instance"></param>
+        </member>
+        <member name="T:MMIUnity.TargetEngine.MMISettings">
+            <summary>
+            Class which contains all MMI settings
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.MMISettings.BasePath">
+            <summary>
+            Provides base path for folder settings (One folder above Assets)
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.MMISettings.MMIRegisterPort">
+            <summary>
+            The port for the access
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.MMISettings.RemoteSceneAccessPort">
+            <summary>
+            The port for the access
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.MMISettings.RemoteSceneAccessAddress">
+            <summary>
+            The port for the access
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.MMISettings.RemoteSceneWritePort">
+            <summary>
+            The port for the external write access
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.MMISettings.RemoteSceneWriteAddress">
+            <summary>
+            The port for the access
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.MMISettings.AllowRemoteSceneConnections">
+            <summary>
+            Specifies whether the scene is accessible for external clients via thrift server
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.MMISettings.RemoteSkeletonAccessPort">
+            <summary>
+            The port for the skeleton access
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.MMISettings.RemoteSkeletonAccessAddress">
+            <summary>
+            The port for the skeleton access
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.MMISettings.AllowRemoteSkeletonConnections">
+            <summary>
+            Specifies whether the skeleton is accessible for external clients via thrift server
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.MMISettings.ShotFolder">
+            <summary>
+            Folder for keeping pictures of parts generated by photobooth and transfered to task editor web service through high level task editor script
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.MMISettings.glTFFolder">
+            <summary>
+            Folder for keeping glTF format CAD models of parts generated by glTFExporter script
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.MMISettings.texturesFolder">
+            <summary>
+            Folder for keeping pngs utilized by editor scripts
+            </summary>
+        </member>
+        <member name="T:MMIUnity.TargetEngine.RemoteCoSimulation">
+            <summary>
+            Wrapper class to a remote cosimulation
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.RemoteCoSimulation.avatar">
+            <summary>
+            The referenced avatar
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.RemoteCoSimulation.serviceAccess">
+            <summary>
+            The service access 
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.RemoteCoSimulation.#ctor(MMICSharp.Access.IMotionModelUnitAccess,MMICSharp.Common.IServiceAccess,MMIUnity.TargetEngine.Scene.MMIAvatar,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Basic constructor
+            </summary>
+            <param name="mmus"></param>
+            <param name="avatar"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.RemoteCoSimulation.Initialize(MMIStandard.MAvatarDescription,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Co Simulator has to be initialized before usage
+            </summary>
+            <param name="avatarDescription"></param>
+            <param name="properties"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.RemoteCoSimulation.AssignInstruction(MMIStandard.MInstruction,MMIStandard.MSimulationState)">
+            <summary>
+            
+            </summary>
+            <param name="instruction"></param>
+            <param name="avatarState"></param>
+        </member>
+        <member name="T:MMIUnity.TargetEngine.Scene.RemoteSkeletonAccessServer">
+            <summary>
+            A server for remotely accessing  the scene
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.RemoteSkeletonAccessServer.controller">
+            <summary>
+            The service controller to host the remote scene access
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.RemoteSkeletonAccessServer.description">
+            <summary>
+            The utilized description
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.RemoteSkeletonAccessServer.#ctor(MMIStandard.MIPAddress,MMIStandard.MIPAddress,MMIStandard.MSkeletonAccess.Iface)">
+            <summary>
+            Constructor to create a new server
+            </summary>
+            <param name="address"></param>
+            <param name="port"></param>
+            <param name="implementation"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.RemoteSkeletonAccessServer.Start">
+            <summary>
+            Starts the adapter server
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.RemoteSkeletonAccessServer.Dispose">
+            <summary>
+            Disposes the adapter server
+            </summary>
+        </member>
+        <member name="T:MMIUnity.TargetEngine.Scene.RemoteSceneManipulation">
+            <summary>
+            Class represent a scene manipulation which is requested remotely
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.RemoteSceneManipulation.SceneManipulations">
+            <summary>
+            The intended scene manipulations
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.RemoteSceneManipulation.#ctor(System.Collections.Generic.List{MMIStandard.MSceneManipulation})">
+            <summary>
+            Basic constructor
+            </summary>
+            <param name="sceneManipulations"></param>
+        </member>
+        <member name="T:MMIUnity.TargetEngine.Scene.RemoteSceneManipulationRequest">
+            <summary>
+            Class represents a scene manipulation request which is defined remotely
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.RemoteSceneManipulationRequest.sceneAccess">
+            <summary>
+            Reference to the sceneAccess
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.RemoteSceneManipulationRequest.#ctor(MMIUnity.TargetEngine.Scene.UnitySceneAccess)">
+            <summary>
+            Basic constructor
+            </summary>
+            <param name="sceneAccess"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.RemoteSceneManipulationRequest.ApplyManipulations(System.Collections.Generic.List{MMIStandard.MSceneManipulation})">
+            <summary>
+            Method to apply the remote scene manipulations
+            </summary>
+            <param name="sceneManipulations"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MMIUnity.TargetEngine.Scene.MMIAvatar">
+            <summary>
+            Basic class which represents an avatar and the underlaying functionality (e.g. behavior, co-sim)
+            </summary>
+        </member>
+        <member name="E:MMIUnity.TargetEngine.Scene.MMIAvatar.OnInitialized">
+            <summary>
+            Event is fired if the MMI Avatar has been successfully initialized
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMIAvatar.UseRemoteCoSimulation">
+            <summary>
+            Flag specifies whether the internal Unity-Cosimulation is utilized or a remotely connected CoSimulation 
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMIAvatar.RemoteCoSimulationName">
+            <summary>
+            The (optional) name of the remote CoSimulation
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMIAvatar.AddBoneSceneObjects">
+            <summary>
+            Flag specifies whether the bones of the avatar should be added as scene objects
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMIAvatar.AllowRemoteCoSimulationAccess">
+            <summary>
+            Specifies whether the scene is accessible for external clients via thrift server
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMIAvatar.RemoteCoSimulationAccessPort">
+            <summary>
+            The port for the external write access
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMIAvatar.RemoteCoSimulationAccessAddress">
+            <summary>
+            The port for the external write access
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMIAvatar.CoSimulator">
+            <summary>
+            The assigned CoSimulator (either local or remote)
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMIAvatar.Behavior">
+            <summary>
+            The behavior component which creates the instructions for the co-simulation and avatar
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMIAvatar.MMUAccess">
+            <summary>
+            Clas which provides access to the MMUs
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMIAvatar.LastPosture">
+            <summary>
+            The posture of the last frame.
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMIAvatar.MAvatar">
+            <summary>
+            The avatar representation within the MMI framework
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMIAvatar.MMUMotionTypesToLoad">
+            <summary>
+            List of mmu motion types that should be loaded
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMIAvatar.LoadRetargetingConfiguration">
+            <summary>
+            Specifies whether the retargeting is loaded from configuration file
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMIAvatar.statusText">
+            <summary>
+            A status text used for visualization
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMIAvatar.coSimulationAccess">
+            <summary>
+            The hosted co-simulation access
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMIAvatar.remoteSkeletonAccessServer">
+            <summary>
+            The hosted remote skeleton access server
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMIAvatar.setupRetargeting">
+            <summary>
+            Indicates whether the setup of the retageting has been successfully done
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMIAvatar.Awake">
+            <summary>
+            Basic awake routine
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMIAvatar.Update">
+            <summary>
+            Update routine which is called for each frame
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMIAvatar.Setup(System.String,System.Int32,System.String)">
+            <summary>
+            Setup method for the MMIAvatar
+            </summary>
+            <param name="address">The address of the MMU server</param>
+            <param name="sessionId">A unique id for the session</param>
+            <param name="avatarID">A unique id for the avatar</param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMIAvatar.SetupRetargeting">
+            <summary>
+            Method to setup the actual retargeting
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMIAvatar.ConnectionCallback(System.Boolean)">
+            <summary>
+            Callback  for the connection setup
+            </summary>
+            <param name="connected"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMIAvatar.LoadingCallback(System.Boolean)">
+            <summary>
+            Callback for the loading of the MMUs
+            </summary>
+            <param name="loaded"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMIAvatar.InitializingCallback(System.Boolean)">
+            <summary>
+            Callback for the initialization of the MMUs
+            </summary>
+            <param name="initialized"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMIAvatar.OnGUI">
+            <summary>
+            Basic on gui method which is called for each frame
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMIAvatar.OnApplicationQuit">
+            <summary>
+            Method is called if the application is quit
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMIAvatar.GetParentStation">
+            <summary>
+            Returns MMIScenObject represnting parent station or null if such is not found
+            </summary>
+        </member>
+        <member name="T:MMIUnity.TargetEngine.Scene.MMISceneObject">
+            <summary>
+            Basic script for scene objects which should be synchronized with the MMI framework.
+            This practically means, that each object which should be synchronized with the framework must have the script attached. Must execute in edit mode to track constraints and save them and load when necessary
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMISceneObject.ShowConstraints">
+            <summary>
+            The scene object in the serializable format of the MMI framework
+            </summary>
+            
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMISceneObject.ShowCoordinateSystem">
+            <summary>
+            Specifies whether the arrow pointing into the direction vector is displayed
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMISceneObject.Velocity">
+            <summary>
+            Allows the specification of a fixed velocity of the object (only works if rigid body is assigned)
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMISceneObject.UpdatePhysicsCurrentFrame">
+            <summary>
+            Specifies whether the physics should be updated for the current frame
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMISceneObject.OverrideColor">
+            <summary>
+            Specifies whether the color of the object should be overwritten
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMISceneObject.Color">
+            <summary>
+            The desired color
+            </summary>
+        </member>
+        <member name="P:MMIUnity.TargetEngine.Scene.MMISceneObject.PhysicsEnabled">
+            <summary>
+            Specifies whether physics is enabled (overall)
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMISceneObject.IgnoreCollision">
+            <summary>
+            Flag indicates whether the meshes should be transferred
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMISceneObject.TransferMesh">
+            <summary>
+            Flag indicates whether the meshes should be transferred
+            </summary>
+        </member>
+        <member name="T:MMIUnity.TargetEngine.Scene.MMISceneObject.Types">
+            Following public fields are used to specify the MMISceneObject depending on the selected type
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMISceneObject.Constraints">
+            <summary>
+            The constraint that are manually assigned to the scene object
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMISceneObject.physicsTracker">
+            <summary>
+            A tracker which monitors potential changes related to physics
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMISceneObject.transformTracker">
+            <summary>
+            A tracker which monitos potential changes related to the transform
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMISceneObject.physicsEnabled">
+            <summary>
+            Flag indicates whetehr physics is enabled for the object (e.g. react on physical forces)
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMISceneObject.rigidBody">
+            <summary>
+            The optionally assigned rigidBody
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMISceneObject.threshold">
+            <summary>
+            Threshold for recognizing changes (e.g. translation changes or physics changes)
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.Awake">
+            <summary>
+            Basic awake routine
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.MarkerFound(MMIStandard.MTransform)">
+            <summary>
+            Returns if returend MTransform is Marker definition. Should be used on results returned from GetInitialLocationConstraint
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.GetIniitalLocationConstriaint(System.String)">
+            <summary>
+            Returns ParentToConstraint of initial location constriant if found
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.GetParentStation">
+            <summary>
+            Returns MMIScenObject represnting parent station or null if such is not found
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.GetParentPartOrGroup">
+            <summary>
+            Returns MMIScenObject represnting parent station or null if such is not found
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.GetCompleteBounds">
+            <summary>
+            Returns Bounds of combined all renderers that are children of the GameObject to which MMISceneObject belongs with respect to the global coordinate system
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.GetParentMMIScenObject">
+            <summary>
+            Returns MMIScenObject represnting parent MMIScenObject or null if such is not found
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.UpdateTransform(System.Boolean)">
+            <summary>
+            Updates the transform of the corresponding MSceneObject
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.Synchronize">
+            <summary>
+            Synchronizes the (internal) MSceneObject with the present data
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.HasConstraint(System.String)">
+            <summary>
+            Function returns true if constraint with the name given as parameter is attached to it (this checks only top level constraints, nested IDS are not checked)
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.HasSpawningZones">
+            <summary>
+            Method returns true if well defined spawning zones are available as constraints within this object
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.isConstraintASpawningZone(System.Int32)">
+            <summary>
+            Method returns true if well defined spawning zone constrain is located in constraints at constraintIndex
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.AddToLibrary">
+            <summary>
+            Method for adding component to part/tool/scene object's libraries - for now placeholder
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.LoadConstraints">
+            <summary>
+            Method for loading constraints from file assigned to the object
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.SaveConstraints">
+            <summary>
+            Method for saving constraints to file assigned to the object
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.OnDrawGizmos">
+            <summary>
+            Debug print
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.SetupTransform">
+            <summary>
+            Sets up the transform of the MSceneObject
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.SetupMesh">
+            <summary>
+            Sets up the mesh of the MSceneObject
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.SetupCollider">
+            <summary>
+            Sets up the collider of the MSceneObject
+            </summary>
+        </member>
+        <member name="T:MMIUnity.TargetEngine.Scene.MMISceneObject.PhysicsTracker">
+            <summary>
+            Class which monitors phsyical changes of the scene object
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.PhysicsTracker.#ctor(MMIStandard.MSceneObject)">
+            <summary>
+            Basic constructor which takes the MSceneObject as input
+            </summary>
+            <param name="msceneObject"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.PhysicsTracker.GetChanges(UnityEngine.Rigidbody)">
+            <summary>
+            Returns the changes occured since the last update
+            </summary>
+            <param name="rigidBody"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.PhysicsTracker.Update(UnityEngine.Rigidbody)">
+            <summary>
+            Updates the internal state as well as the phsysics properties of the scene object
+            </summary>
+            <param name="rigidBody"></param>
+        </member>
+        <member name="T:MMIUnity.TargetEngine.Scene.MMISceneObject.TransformTracker">
+            <summary>
+             Class which monitors transformation changes of the scene object
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.MMISceneObject.TransformTracker.Threshold">
+            <summary>
+            The specified threshold above which changes are recognized
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.TransformTracker.#ctor(MMIStandard.MSceneObject)">
+            <summary>
+            Basic constructor which takes the MSceneObject as input
+            </summary>
+            <param name="msceneObject"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.TransformTracker.HasChanged(UnityEngine.Transform)">
+            <summary>
+            Indicates whether changes occured since the last frame
+            </summary>
+            <param name="transform"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.MMISceneObject.TransformTracker.Update(UnityEngine.Transform)">
+            <summary>
+            Updates the internal state according to the specified transform
+            </summary>
+            <param name="transform"></param>
+        </member>
+        <member name="T:MMIUnity.TargetEngine.Scene.RemoteSceneAccessServer">
+            <summary>
+            A server for remotely accessing  the scene
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.RemoteSceneAccessServer.controller">
+            <summary>
+            The service controller to host the remote scene access
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.RemoteSceneAccessServer.description">
+            <summary>
+            The utilized description
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.RemoteSceneAccessServer.#ctor(MMIStandard.MIPAddress,MMIStandard.MIPAddress,MMIStandard.MSceneAccess.Iface)">
+            <summary>
+            Constructor to create a new server
+            </summary>
+            <param name="address"></param>
+            <param name="port"></param>
+            <param name="implementation"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.RemoteSceneAccessServer.Start">
+            <summary>
+            Starts the adapter server
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.RemoteSceneAccessServer.Dispose">
+            <summary>
+            Disposes the adapter server
+            </summary>
+        </member>
+        <member name="T:MMIUnity.TargetEngine.Scene.RemoteSceneManipulationServer">
+            <summary>
+            Class represents a server which provides the possibility to handle scene manipulations based on remote requests
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.RemoteSceneManipulationServer.controller">
+            <summary>
+            The utilized base server with the default configuration used within the MMI framework.
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.RemoteSceneManipulationServer.description">
+            <summary>
+            The utilized description
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.RemoteSceneManipulationServer.#ctor(MMIStandard.MIPAddress,MMIStandard.MIPAddress,MMIStandard.MSynchronizableScene.Iface)">
+            <summary>
+            Constructor to create a new server
+            </summary>
+            <param name="address"></param>
+            <param name="port"></param>
+            <param name="implementation"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.RemoteSceneManipulationServer.Start">
+            <summary>
+            Starts the adapter server
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.RemoteSceneManipulationServer.Dispose">
+            <summary>
+            Disposes the adapter server
+            </summary>
+        </member>
+        <member name="T:MMIUnity.TargetEngine.Scene.UnityBone">
+            <summary>
+            Class for representing a MMI compatible bone within unity
+            </summary>
+        </member>
+        <member name="T:MMIUnity.TargetEngine.Scene.HandType">
+            <summary>
+            Enum for representing a hand type
+            </summary>
+        </member>
+        <member name="T:MMIUnity.TargetEngine.Scene.UnityHandPose">
+            <summary>
+            Class represent a hand pose within the unity engine
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.UnityHandPose.HandType">
+            <summary>
+            The hand type 
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnityHandPose.GetPose">
+            <summary>
+            Returns an interaction pose representing the current hand transform
+            To do return root Bone as global coordinates
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnityHandPose.GetJointConstraints">
+            <summary>
+            Returns a joint constraint representing the hand posture
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnityHandPose.GetPostureConstraint">
+            <summary>
+            Creates a posture constraint given the UnityHandPose 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnityHandPose.OnDrawGizmos">
+            <summary>
+            Editor visualization
+            </summary>
+        </member>
+        <member name="T:MMIUnity.TargetEngine.Scene.UnitySceneAccess">
+            <summary>
+            Class which provides a basic scene access for the unity scene. 
+            This is fundamental component for the synchronization with he MMI framework.
+            It needs to be added to a root GameObject. All MMISceneObject which should be considered must be below this object in hierarchy.
+            </summary>
+        </member>
+        <member name="P:MMIUnity.TargetEngine.Scene.UnitySceneAccess.Item(System.String)">
+            <summary>
+            Indixer for accessing scene object by name
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.UnitySceneAccess.LocalMaxMMIAvatarId">
+            <summary>
+            Max AvatarID, it is constantly incremented so when avatar is deleted its id will not be reused in future in the same scene
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.UnitySceneAccess.FrameID">
+            <summary>
+            The current frame id
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.UnitySceneAccess.HistoryBufferSize">
+            <summary>
+            Store the last n frames
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.UnitySceneAccess.SimulationTime">
+            <summary>
+            The current simulation time
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.UnitySceneAccess.SceneHistory">
+            <summary>
+            A queue which contains the history of the last n applied scnee manipulations
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.UnitySceneAccess.RemoteSceneManipulations">
+            <summary>
+            A queue holding the remote scene manipulation requests that might have been inserted asynchronously (the server runs on a separate thread)
+            </summary>
+        </member>
+        <member name="P:MMIUnity.TargetEngine.Scene.UnitySceneAccess.Instance">
+            <summary>
+            The singleton instance
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.UnitySceneAccess.avatarLocalIDMutex">
+            <summary>
+            Mutex for accessing scene related elements
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.UnitySceneAccess.nameIdMappingSceneObjects">
+            <summary>
+            Mapping between the name of a scene object and a unique id
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.UnitySceneAccess.sceneObjectsByID">
+            <summary>
+            Dictionary containing all scene objects structured by the specific id
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.UnitySceneAccess.avatarsByID">
+            <summary>
+            Dictionary which allows the access of different avatar by the corresponding id
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.UnitySceneAccess.nameIdMappingAvatars">
+            <summary>
+            Dictionary that provides a fast access to the name id mapping of the avatars
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.UnitySceneAccess.SceneUpdate">
+            <summary>
+            The last processed scene update
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.UnitySceneAccess.sceneChanges">
+            <summary>
+            The list of all scene events
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.UnitySceneAccess.remoteSceneAccessServer">
+            <summary>
+            Server for the remote scene access
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.Scene.UnitySceneAccess.remoteSceneManipulationServer">
+            <summary>
+            Server for the remote scene manipulations
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.Awake">
+            <summary>
+            Basic awake routine
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.Start">
+            <summary>
+            Basic start routine executed by unity
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.OnApplicationQuit">
+            <summary>
+            Method is executed if the application is terminated
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.UpdateLocalMaxMMIAvatarId">
+            <summary>
+            In case MaxMMIAvatarID is reset and scene contains avatars, the LocalMaxMMIAvatarID has to be set to the largest localID from the avatars in the scene,
+            otherwise duplicating an avatar would result in assinging it duplicate localID at some point
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.AutoRegisterAvatars">
+            <summary>
+            Every avatar registers here in OnEnable event, however, if UnitySceneAccess script at that time is not yet awaken, then such avatar
+            will not be registered. To handle random order of scripts initialization, once UnitySceneAccess gets the OnEnable event, it queries scene
+            for all the avatars and autoregisters them (including inactive avatars). The volunary avatar registration is mostly usefull as event receiving mechanism
+            for registering duplication of programatic creation of the avatars in the scene, once the SceneAccessScript is already enabled.
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.CreateUUID">
+            <summary>
+            Creates a new UUI for arbitrary objects within the scene 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.CreateSceneObjectID">
+            <summary>
+            Creates a seperate scene object id by just incrementing the number. 
+            Provides unique ids in the scope of the session ID.
+            Warning this does not create unique UUIDs in a global scope
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.CreateAvatarID">
+            <summary>
+            Creates a seperate scene avatar id by just incrementing the number. 
+            Provides unique ids in the scope of the session ID.
+            Warning this does not create unique UUIDs in a global scope
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.ApplyUpdates(MMIStandard.MSceneUpdate)">
+            <summary>
+            Applies the scene updates on the scene -> Sychronization of the scene
+            </summary>
+            <param name="sceneUpdates">The scene manipulations to be considered</param>
+            <param name="deepCopy">Specifies whether the scene manipulations are directly applied or a deep copy is performed</param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.ApplyManipulations(System.Collections.Generic.List{MMIStandard.MSceneManipulation})">
+            <summary>
+            Applies manipulations 
+            </summary>
+            <param name="sceneManipulations"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.AddAvatar(MMIStandard.MAvatar)">
+            <summary>
+            Method to add a scene object
+            </summary>
+            <param name="sceneObject"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.AddSceneObject(MMIStandard.MSceneObject)">
+            <summary>
+            Method to add a scene object
+            </summary>
+            <param name="sceneObject"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.PhysicsPropertiesChanged(MMIStandard.MSceneObject,MMIStandard.MPhysicsProperties)">
+            <summary>
+            Method to signalize changed physics properties
+            </summary>
+            <param name="sceneObject"></param>
+            <param name="physicsProperties"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.TransformationChanged(MMIStandard.MSceneObject,MMIStandard.MVector3,MMIStandard.MQuaternion,System.String)">
+            <summary>
+            Method to signalize transformation cahnges of a scene object
+            </summary>
+            <param name="sceneObject"></param>
+            <param name="position"></param>
+            <param name="rotation"></param>
+            <param name="parent"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.RemoveSceneObject(MMIStandard.MSceneObject)">
+            <summary>
+            Method to remove a scene object
+            </summary>
+            <param name="sceneObject"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.ClearChanges">
+            <summary>
+            Clears all scene changes that are currently buffered
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetSceneChanges">
+            <summary>
+            Returns the changes / scene manipulations of the last frame
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetFullScene">
+            <summary>
+            Returns the full scene in form of a list of scene manipulations
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetColliders">
+            <summary>
+            Returns all colliders
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetSceneUpdate(System.Int32)">
+            <summary>
+            Returns the scene update of a particular frame
+            </summary>
+            <param name="frameID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetMesh(System.String)">
+            <summary>
+            Returns the mesh by a given name (if available)
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetSceneObject(System.String)">
+            <summary>
+            Returns the scene object by a given name (if available)
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetSceneObjectByID(System.String)">
+            <summary>
+            Returns the scene object based on the id (if available)
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetSceneObjects">
+            <summary>
+            Returns a list of all scene objects
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetTransform(System.String)">
+            <summary>
+            Returns the transform by name (if available)
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetTransforms">
+            <summary>
+            Returns all transforms in the scene
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetSceneObjectByName(System.String)">
+            <summary>
+            Returns a scene object by name (if available)
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetSceneObjectsInRange(MMIStandard.MVector3,System.Double)">
+            <summary>
+            Returns all scene objects in a particular range
+            </summary>
+            <param name="position"></param>
+            <param name="range"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetColliderById(System.String)">
+            <summary>
+            Returns the collider based on a given id (if available)
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetCollidersInRange(MMIStandard.MVector3,System.Double)">
+            <summary>
+            Returns all colliders in range
+            </summary>
+            <param name="position"></param>
+            <param name="range"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetMeshes">
+            <summary>
+            Returns all meshes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetMeshByID(System.String)">
+            <summary>
+            Returns a mesh defined by the id (if available)
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetTransformByID(System.String)">
+            <summary>
+            Returns the transform by id (if available)
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetAvatars">
+            <summary>
+            Returns all avatars in the scene
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetAvatarByID(System.String)">
+            <summary>
+            Returns an avatar by id (if available)
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetAvatarByName(System.String)">
+            <summary>
+            Returns an avatar by a given name (if available)
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetAvatarsInRange(MMIStandard.MVector3,System.Double)">
+            <summary>
+            Returns the avatars in range of the specified position
+            </summary>
+            <param name="position"></param>
+            <param name="distance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetSimulationTime">
+            <summary>
+            Returns the current simulation time
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.Dispose(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Disposes the service
+            </summary>
+            <param name="properties"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.Restart(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Restarts the scene service -> Nothing to do in here
+            </summary>
+            <param name="properties"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetNavigationMesh">
+            <summary>
+            Returns a navigation mesh of the scene
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetData(System.String,System.String)">
+            <summary>
+            Returns the scene in a specific format (E.g. gltf) -> To do
+            </summary>
+            <param name="fileFormat"></param>
+            <param name="selection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetStatus">
+            <summary>
+            Returns the present status
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetDescription">
+            <summary>
+            Provides the description of the scene service
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetAttachments">
+            <summary>
+            Returns all attachements
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetAttachmentsByID(System.String)">
+            <summary>
+            Returns the attachments by the given id (if available)
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetAttachmentsByName(System.String)">
+            <summary>
+            Returns the attachmetns by the given name (if available)
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetAttachmentsChildrenRecursive(System.String)">
+            <summary>
+             Returns all attachments of the children (recursively) including the one of the scene object specified by the id).
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetAttachmentsParentsRecursive(System.String)">
+            <summary>
+            Returns all attachments of the parents (recursively) including the one of the scene object specified by the id).
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.Setup(MMIStandard.MAvatarDescription,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Setup function defined in the MMIServiceBase interface
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.Consume(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Consume function defined in the MMIServiceBase interface
+            </summary>
+            <param name="properties"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.GetChild(MMIStandard.MSceneObject)">
+            <summary>
+            Returns the child of the scene object (if available=
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.AddAvatars(System.Collections.Generic.List{MMIStandard.MAvatar})">
+            <summary>
+            Adds avatars to the internal scene representation
+            </summary>
+            <param name="avatars"></param>
+            <param name="deepCopy"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.AddSceneObjects(System.Collections.Generic.List{MMIStandard.MSceneObject})">
+            <summary>
+            Adds scene obnjects to the internal scene representation
+            </summary>
+            <param name="sceneObjects"></param>
+            <param name="deepCopy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.UpdateSceneObjects(System.Collections.Generic.List{MMIStandard.MSceneObjectUpdate})">
+            <summary>
+            Adds scene obnjects to the internal scene representation
+            </summary>
+            <param name="sceneObjects"></param>
+            <param name="deepCopy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.UpdateAvatars(System.Collections.Generic.List{MMIStandard.MAvatarUpdate})">
+            <summary>
+            Adds avatars to the internal scene representation
+            </summary>
+            <param name="avatars"></param>
+            <param name="deepCopy"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.RemoveAvatars(System.Collections.Generic.List{System.String})">
+            <summary>
+            Removes avatars from the scene by given ids
+            </summary>
+            <param name="avatarIDs"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.Scene.UnitySceneAccess.RemoveSceneObjects(System.Collections.Generic.List{System.String})">
+            <summary>
+            Removes scene objects from the scene by given ids
+            </summary>
+            <param name="sceneObjectIDs"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MMIUnity.TargetEngine.SimulationController">
+            <summary>
+            Central class for coordinating the whole simulation.
+            The script should be added to the root object which contains all avatars and the scene.
+            Open Points: One scene for all, or each co-simulation holds one scene (more strict separation)
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.SimulationController.SessionId">
+            <summary>
+            The unique session id 
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.SimulationController.RealTime">
+            <summary>
+            Specifies whether the co simulator works in realtime
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.SimulationController.FixedStepTime">
+            <summary>
+            Specifies the fixed frame time (if non realtime mode)
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.SimulationController.PhysicsUpdatesPerFrame">
+            <summary>
+            The amount of physics updates within each frame
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.SimulationController.Avatars">
+            <summary>
+            All assigned avatars
+            </summary>
+        </member>
+        <member name="E:MMIUnity.TargetEngine.SimulationController.OnInitialized">
+            <summary>
+            On initialized event
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.SimulationController.initialized">
+            <summary>
+            Flag which inicates whether the Co Simulator is initialized
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.SimulationController.frameDeltaTime">
+            <summary>
+            The delta time for the current frame
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.SimulationController.coSimulationCheckpoints">
+            <summary>
+            The serialized co-simulation checkpoints -> to be extended inn future
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.SimulationController.sceneCheckpoints">
+            <summary>
+            The checkoints of the scenes
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.SimulationController.frameNumber">
+            <summary>
+            The present frame number
+            </summary>
+        </member>
+        <member name="F:MMIUnity.TargetEngine.SimulationController.currentUpdateFPS">
+            <summary>
+            The current fps 
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.SimulationController.Setup">
+            <summary>
+            Method to setup the simulation controller
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.SimulationController.DoStep(System.Single)">
+            <summary>
+            Performs a simulation cycle for a single frame
+            </summary>
+            <param name="time"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.SimulationController.OnResultComputed(MMIStandard.MSimulationResult,MMIUnity.TargetEngine.Scene.MMIAvatar)">
+            <summary>
+            Method which is called for each frame and avatar.
+            In here further processing can be done (e.g. setting variables of the MMIAvatar).
+            </summary>
+            <param name="result"></param>
+            <param name="avatar"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.SimulationController.OnApplicationQuit">
+            <summary>
+            Method is executed if the application is qut
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.SimulationController.CheckInitialization">
+            <summary>
+            Coroutine to check the initialization state
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.SimulationController.ApplySceneUpdate(System.Collections.Concurrent.ConcurrentDictionary{MMIUnity.TargetEngine.Scene.MMIAvatar,MMIStandard.MSimulationResult})">
+            <summary>
+            Applies the updates of the scene
+            </summary>
+            <param name="results"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.SimulationController.ApplyRemoteSceneUpdates">
+            <summary>
+            Applies scene updates which are remotely defined
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.SimulationController.UpdatePhysics(System.Single)">
+            <summary>
+            Manually updates the phsyics engine using the specified timespan and the PhysicsUpdatesPerFrame variable
+            </summary>
+            <param name="time"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.SimulationController.PushScene">
+            <summary>
+            Pushes the scene to each adapter/MMU
+            Scene synchronization
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.SimulationController.SaveState">
+            <summary>
+            Saves the state of the scene and all avatars
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.SimulationController.RestoreState">
+             <summary>
+            Restores the state of the scene and all avatars
+             </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.SimulationController.SaveScene">
+            <summary>
+            Creates a snapshot of the scene
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.SimulationController.RestoreScene(System.Byte[])">
+            <summary>
+            Restores the scene based on a snapshot
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="T:MMIUnity.TargetEngine.TransformExtensions">
+            <summary>
+            Class contains several extensions for the Unity transforms
+            </summary>
+        </member>
+        <member name="M:MMIUnity.TargetEngine.TransformExtensions.GetLocalPositionScaleIndependent(UnityEngine.Transform)">
+            <summary>
+            Returns the local position and ignores the scale
+            </summary>
+            <param name="transform"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ObjectSpawner">
+            <summary>
+            Class spwans objects to a desired material zone
+            </summary>
+        </member>
+        <member name="M:ObjectSpawner.SpawnObject(MMIUnity.TargetEngine.Scene.MMISceneObject,System.Collections.Generic.List{MMIStandard.MGeometryConstraint},UnityEngine.Transform,UnityEngine.Transform,System.Boolean)">
+            <summary>
+            Spawns a specific scene object within the scene considering the defiend spawning zones defined as MGeometryConstraints which needs to be given as a paramerer
+            </summary>
+            <param name="sceneObject">The scene object that should be spawned</param>
+            <param name="spawningZones">The available spawning zones defined as MGeometryConstraints</param>
+            <param name="initialLocationsRoot">Transform which holds all initial locations (parent object)</param>
+            <param name="finalLocationsRoot">Transform which holds all final locations (parent object)</param>
+            <param name="useRotation">Defines whether the rotation of the spawned object is adapted</param>
+        </member>
+        <member name="M:ObjectSpawner.SampleTransformFromBox(MMIStandard.MGeometryConstraint,UnityEngine.Bounds)">
+            <summary>
+            Samples a position from the box defined by the geom constriant taking into account also object bounds
+            </summary>
+            <param name="geomConstraint"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ObjectSpawner.SampleTransformFromBox(MMIStandard.MGeometryConstraint)">
+            <summary>
+            Samples a position from the box defined by the geom constriant
+            </summary>
+            <param name="geomConstraint"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ObjectSpawner.SampleFromNBall(System.Int32)">
+            <summary>
+            Samples uniformly from a n ball
+            </summary>
+            <param name="dimensions">The dimensions of the ball</param>
+            <returns></returns>
+        </member>
+        <member name="M:ObjectSpawner.GetRandomGaussian(System.Single,System.Single)">
+            <summary>
+            Returns a gaussian distributed random value
+            </summary>
+            <param name="mu"></param>
+            <param name="sigma"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
